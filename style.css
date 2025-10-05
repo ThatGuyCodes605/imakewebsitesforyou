@@ -1,0 +1,148 @@
+/* RESET */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", Consolas, monospace;
+  background-color: #000;
+  color: #00ffff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Animated background grid */
+.bg-grid {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px),
+    linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: -1;
+  animation: gridMove 10s linear infinite;
+}
+
+@keyframes gridMove {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 40px 40px, 40px 40px; }
+}
+
+/* HEADER */
+header {
+  padding: 40px 0 20px;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 20px rgba(0,255,255,0.3);
+  animation: fadeSlideDown 1.5s ease-out;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.neon-glow {
+  color: aqua;
+  text-shadow:
+    0 0 10px aqua,
+    0 0 20px aqua,
+    0 0 40px cyan,
+    0 0 80px cyan;
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 10px aqua, 0 0 20px aqua; }
+  100% { text-shadow: 0 0 20px cyan, 0 0 60px lime; }
+}
+
+/* HR glow */
+hr {
+  border: none;
+  height: 2px;
+  width: 60%;
+  background: linear-gradient(90deg, transparent, aqua, lime, transparent);
+  margin: 20px auto;
+  animation: glowLine 3s infinite alternate;
+}
+
+@keyframes glowLine {
+  from { box-shadow: 0 0 5px aqua; }
+  to { box-shadow: 0 0 25px lime; }
+}
+
+/* Typing text */
+.typing {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: bold;
+  margin-top: 40px;
+  min-height: 2.5em;
+  border-right: 3px solid lime;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.8s step-end infinite;
+  color: #00ffff;
+}
+
+/* Paragraph boxes */
+.content p {
+  font-size: 1.2em;
+  margin: 40px auto;
+  max-width: 750px;
+  padding: 25px;
+  border: 2px solid lime;
+  border-radius: 12px;
+  background: rgba(0, 20, 0, 0.85);
+  box-shadow: 0 0 20px lime;
+  animation: fadeIn 2s ease-in;
+  transition: all 0.3s ease;
+}
+
+.content p:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px #00ff99;
+}
+
+/* Contact link */
+.contact a {
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 0 0 10px #00ffff;
+  transition: all 0.3s ease;
+}
+
+.contact a:hover {
+  color: lime;
+  text-shadow: 0 0 20px lime;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 20px 0;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 0.9rem;
+  color: #00ffff;
+  opacity: 0.9;
+  border-top: 1px solid rgba(0,255,255,0.3);
+}
+
+/* Animations */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+*{
+    text-align: center;
+}
