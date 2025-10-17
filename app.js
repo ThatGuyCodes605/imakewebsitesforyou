@@ -32,3 +32,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
   type();
 });
+// Get all slides and buttons
+const slides = document.querySelectorAll(".slide");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+
+let currentIndex = 0;
+
+// Function to show a specific slide
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.remove("active");
+    if (i === index) slide.classList.add("active");
+  });
+}
+
+// Next and previous buttons
+nextBtn.addEventListener("click", () => {
+  currentIndex++;
+  if (currentIndex >= slides.length) currentIndex = 0;
+  showSlide(currentIndex);
+});
+
+prevBtn.addEventListener("click", () => {
+  currentIndex--;
+  if (currentIndex < 0) currentIndex = slides.length - 1;
+  showSlide(currentIndex);
+});
+
+// Auto slide every 4 seconds
+setInterval(() => {
+  currentIndex = (currentIndex + 1) % slides.length;
+  showSlide(currentIndex);
+}, 4000);
+
