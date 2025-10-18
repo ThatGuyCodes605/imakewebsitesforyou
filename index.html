@@ -26,13 +26,12 @@
         I can bring your ideas to life on the web.
       </p>
       <p>websites we have made</p>
-      
+
       <div class="slider">
         <div class="slides">
           <img src="screenshot-2025-10-17_17-36-41.png" class="slide active" alt="Slide 1">
           <img src="screenshot-2025-10-17_17-43-10.png" class="slide" alt="Slide 2">
         </div>
-
         <button class="prev">❮</button>
         <button class="next">❯</button>
       </div>
@@ -64,66 +63,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="app.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script src="https://www.paypal.com/sdk/js?client-id=ATuyVl7_AgVkJEpNqFE5AInPPJ4KXsQFQEj2MAjfhJPjh8I-_MzubjytwBgglNk7w6ZJphJkljVrVa3K&currency=GBP"></script>
-
-  <script>
-    // Initialize EmailJS (replace YOUR_PUBLIC_KEY)
-    emailjs.init("vOtzuihNoRrYTbz2Z");
-
-    const sendBtn = document.getElementById("send-btn");
-    const paypalContainer = document.getElementById("paypal-button-container");
-
-    sendBtn.addEventListener("click", () => {
-      const email = document.getElementById("user-email").value.trim();
-      const message = document.getElementById("user-message").value.trim();
-
-      if (!email || !message) {
-        alert("Please fill out both fields before continuing.");
-        return;
-      }
-
-      // Send email using EmailJS
-      emailjs.send("service_8iufopm", "template_27ub2xp", {
-        from_email: email,
-        message: message,
-      }).then(() => {
-        alert("Message sent successfully! ✅ Now complete your payment below.");
-        paypalContainer.style.display = "block";
-        sendBtn.style.display = "none";
-      }).catch((err) => {
-        console.error("EmailJS error:", err);
-        alert("Failed to send message. Please try again.");
-      });
-    });
-
-    // PayPal Button
-    paypal.Buttons({
-      style: {
-        color: 'blue',
-        shape: 'pill',
-        label: 'pay',
-        layout: 'vertical'
-      },
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: { value: '20.00' },
-            description: "Custom Website Order"
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('Payment completed! Thank you, ' + details.payer.name.given_name + ' 🎉');
-        });
-      },
-      onError: function(err) {
-        console.error(err);
-        alert('Something went wrong with PayPal. Please try again.');
-      }
-    }).render('#paypal-button-container');
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

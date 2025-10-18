@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // 🟢 Typewriter
   const words = [
     { text: "CSS", color: "#2465F1" },
     { text: "HTML", color: "#F06427" },
@@ -31,88 +32,87 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   type();
-});
-// Get all slides and buttons
-const slides = document.querySelectorAll(".slide");
-const nextBtn = document.querySelector(".next");
-const prevBtn = document.querySelector(".prev");
 
-let currentIndex = 0;
+  // 🟣 Image Slider
+  const slides = document.querySelectorAll(".slide");
+  const nextBtn = document.querySelector(".next");
+  const prevBtn = document.querySelector(".prev");
+  let currentIndex = 0;
 
-// Function to show a specific slide
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.remove("active");
-    if (i === index) slide.classList.add("active");
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+      if (i === index) slide.classList.add("active");
+    });
+  }
+
+  nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
   });
-}
 
-// Next and previous buttons
-nextBtn.addEventListener("click", () => {
-  currentIndex++;
-  if (currentIndex >= slides.length) currentIndex = 0;
-  showSlide(currentIndex);
+  prevBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    showSlide(currentIndex);
+  });
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    showSlide(currentIndex);
+  }, 4000);
+
+  // 🟡 EmailJS Setup
+  emailjs.init("vOtzuihNoRrYTbz2Z");
+
+  const sendBtn = document.getElementById("send-btn");
+  const paypalContainer = document.getElementById("paypal-button-container");
+
+  sendBtn.addEventListener("click", () => {
+    const email = document.getElementById("user-email").value.trim();
+    const message = document.getElementById("user-message").value.trim();
+
+    if (!email || !message) {
+      alert("Please fill out both fields before continuing.");
+      return;
+    }
+
+    emailjs.send("service_8iufopm", "template_27ub2xp", {
+      from_email: email,
+      message: message,
+    }).then(() => {
+      alert("✅ Message sent successfully! Now complete your payment below.");
+      paypalContainer.style.display = "block";
+      sendBtn.style.display = "none";
+    }).catch((err) => {
+      console.error("EmailJS error:", err);
+      alert("❌ Failed to send message. Please try again.");
+    });
+  });
+
+  // 💳 PayPal
+  paypal.Buttons({
+    style: {
+      color: 'blue',
+      shape: 'pill',
+      label: 'pay',
+      layout: 'vertical'
+    },
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '20.00' },
+          description: "Custom Website Order"
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Payment completed! Thank you, ' + details.payer.name.given_name + ' 🎉');
+      });
+    },
+    onError: function(err) {
+      console.error(err);
+      alert('Something went wrong with PayPal. Please try again.');
+    }
+  }).render('#paypal-button-container');
 });
-
-prevBtn.addEventListener("click", () => {
-  currentIndex--;
-  if (currentIndex < 0) currentIndex = slides.length - 1;
-  showSlide(currentIndex);
-});
-
-// Auto slide every 4 seconds
-setInterval(() => {
-  currentIndex = (currentIndex + 1) % slides.length;
-  showSlide(currentIndex);
-}, 4000);
-const myBox = document.getElementById('myBox');
-myBox.addEventListener("click", changecolor);
-
-function changecolor(event) {
-    console.log(event);
-    event.target.style.backgroundColor = "tomato";
-    event.target.textContent = "Ouch! That hurt! 😢";
-}
-myBox.addEventListener("mouseover", resetbox);
-
-function resetbox(event) {
-    event.target.style.backgroundColor = "yellow";
-    event.target.textContent = "dont click me! 😳";
-}
-myBox.addEventListener("mouseout", originalbox);
-
-function originalbox(event) {
-    event.target.style.backgroundColor = "lightgreen";
-    event.target.textContent = "click me 😉";
-}
-const myBox2 = document.getElementById('myBox2');
-myBox2.addEventListener("click", changecolor2);
-
-function changecolor2(event) {
-    console.log(event);
-    event.target.style.backgroundColor = "tomato";
-    event.target.textContent = "Ouch! That hurt! 😢";
-}
-myBox2.addEventListener("mouseover", resetbox2);
-
-function resetbox2(event) {
-    event.target.style.backgroundColor = "yellow";
-    event.target.textContent = "dont click me! 😳";
-}
-myBox2.addEventListener("mouseout", originalbox2);
-
-function originalbox2(event) {
-    event.target.style.backgroundColor = "lightgreen";
-    event.target.textContent = "click me 😉";
-}
-
-function resetbox(event) {
-    event.target.style.backgroundColor = "yellow";
-    event.target.textContent = "dont click me! 😳";
-}
-myBox.addEventListener("mouseout", originalbox);
-
-function originalbox(event) {
-    event.target.style.backgroundColor = "lightgreen";
-    event.target.textContent = "click me 😉";
-}
