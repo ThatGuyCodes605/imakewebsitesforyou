@@ -299,15 +299,89 @@ button.next {
 
 #payment {
   margin: 40px auto;
-  padding: 20px;
-  border: 2px solid cyan;
+  padding: 25px;
+  border: 2px solid lime;
   border-radius: 12px;
-  max-width: 400px;
-  box-shadow: 0 0 20px cyan;
-  background: rgba(0, 30, 30, 0.8);
+  max-width: 480px;
+  box-shadow: 0 0 25px lime;
+  background: rgba(0, 30, 30, 0.85);
   animation: fadeIn 2s ease-in;
+  text-align: center;
 }
+
 #payment h2 {
-  color: #00ffff;
-  text-shadow: 0 0 10px cyan;
+  color: #00ff99;
+  text-shadow: 0 0 15px lime, 0 0 25px #00ffcc;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 15px;
 }
+
+#payment p {
+  font-size: 1rem;
+  color: #00ffcc;
+  margin-bottom: 20px;
+}
+
+#payment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#payment-form input,
+#payment-form textarea {
+  width: 90%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+  background: #000;
+  color: #00ffff;
+  font-family: Consolas, monospace;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#payment-form input:focus,
+#payment-form textarea:focus {
+  box-shadow: 0 0 15px #00ffff;
+  border-color: lime;
+}
+
+#send-btn {
+  background: linear-gradient(90deg, cyan, lime);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px cyan;
+}
+
+#send-btn:hover {
+  background: linear-gradient(90deg, lime, cyan);
+  box-shadow: 0 0 30px lime;
+  transform: scale(1.05);
+}
+
+#paypal-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  padding: 15px 0;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 0.9rem;
+  color: #00ffff;
+  opacity: 0.9;
+  border-top: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+

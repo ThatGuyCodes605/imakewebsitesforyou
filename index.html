@@ -27,24 +27,30 @@
       </p>
       <p>websites we have made</p>
       
-      
-        <div class="slider">
-    <div class="slides">
-      <!-- Each slide -->
-       
-      <img src="screenshot-2025-10-17_17-36-41.png" class="slide active" alt="Slide 1">
-      <img src="screenshot-2025-10-17_17-43-10.png" class="slide" alt="Slide 2">
-    </div>
+      <div class="slider">
+        <div class="slides">
+          <img src="screenshot-2025-10-17_17-36-41.png" class="slide active" alt="Slide 1">
+          <img src="screenshot-2025-10-17_17-43-10.png" class="slide" alt="Slide 2">
+        </div>
 
-    <!-- Navigation buttons -->
-    <button class="prev">❮</button>
-    <button class="next">❯</button>
-  </div>
-<section id="payment">
-  <h2>Support My Work 💖</h2>
-  <p>If you’d like to order a website (email me first) or support my projects, you can send a payment safely using PayPal:</p>
-  <div id="paypal-button-container"></div>
-</section>
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
+      </div>
+
+      <!-- 💳 Combined Email + PayPal Box -->
+      <section id="payment">
+        <h2>Order Your Website 💻</h2>
+        <p>Enter your email and a short message about your website idea. Then click below to send it and pay £20 securely via PayPal.</p>
+
+        <form id="payment-form">
+          <input type="email" id="user-email" placeholder="Your Email" required />
+          <textarea id="user-message" placeholder="Your Message" rows="4" required></textarea>
+          <button type="button" id="send-btn">Send Message & Pay £20</button>
+        </form>
+
+        <!-- PayPal button appears here after sending message -->
+        <div id="paypal-button-container" style="display:none; margin-top:15px;"></div>
+      </section>
 
       <p class="contact">
         Contact me:
@@ -57,40 +63,66 @@
     <p>© 2025 We Make Websites | Crafted with ❤️ and code</p>
   </footer>
 
-  <script src="app.js"></script>
-  <!-- PayPal SDK (replace YOUR_CLIENT_ID with yours) -->
-<script src="https://www.paypal.com/sdk/js?client-id=ATuyVl7_AgVkJEpNqFE5AInPPJ4KXsQFQEj2MAjfhJPjh8I-_MzubjytwBgglNk7w6ZJphJkljVrVa3K&currency=GBP"></script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=ATuyVl7_AgVkJEpNqFE5AInPPJ4KXsQFQEj2MAjfhJPjh8I-_MzubjytwBgglNk7w6ZJphJkljVrVa3K&currency=GBP"></script>
 
-<script>
-  paypal.Buttons({
-    style: {
-      color: 'blue',
-      shape: 'pill',
-      label: 'pay',
-      layout: 'vertical'
-    },
-    createOrder: function(data, actions) {
-      // Example: Set a fixed price of $50
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '20.00'
-          },
-          description: "Custom Website Order"
-        }]
-      });
-    },
-    onApprove: function(data, actions) {
-      return actions.order.capture().then(function(details) {
-        alert('Payment completed! Thank you, ' + details.payer.name.given_name + ' 🎉');
-      });
-    },
-    onError: function(err) {
-      console.error(err);
-      alert('Something went wrong with PayPal. Please try again.');
-    }
-  }).render('#paypal-button-container');
-</script>
+  <script>
+    // Initialize EmailJS (replace YOUR_PUBLIC_KEY)
+    emailjs.init("vOtzuihNoRrYTbz2Z");
 
+    const sendBtn = document.getElementById("send-btn");
+    const paypalContainer = document.getElementById("paypal-button-container");
+
+    sendBtn.addEventListener("click", () => {
+      const email = document.getElementById("user-email").value.trim();
+      const message = document.getElementById("user-message").value.trim();
+
+      if (!email || !message) {
+        alert("Please fill out both fields before continuing.");
+        return;
+      }
+
+      // Send email using EmailJS
+      emailjs.send("service_8iufopm", "template_27ub2xp", {
+        from_email: email,
+        message: message,
+      }).then(() => {
+        alert("Message sent successfully! ✅ Now complete your payment below.");
+        paypalContainer.style.display = "block";
+        sendBtn.style.display = "none";
+      }).catch((err) => {
+        console.error("EmailJS error:", err);
+        alert("Failed to send message. Please try again.");
+      });
+    });
+
+    // PayPal Button
+    paypal.Buttons({
+      style: {
+        color: 'blue',
+        shape: 'pill',
+        label: 'pay',
+        layout: 'vertical'
+      },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: '20.00' },
+            description: "Custom Website Order"
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Payment completed! Thank you, ' + details.payer.name.given_name + ' 🎉');
+        });
+      },
+      onError: function(err) {
+        console.error(err);
+        alert('Something went wrong with PayPal. Please try again.');
+      }
+    }).render('#paypal-button-container');
+  </script>
 </body>
 </html>
