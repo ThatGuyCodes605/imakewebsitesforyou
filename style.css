@@ -24,7 +24,7 @@ main {
   position: relative;
   margin: 30px auto;
   width: 90%;
-  max-width: 600px;
+  max-width: 800px;
   height: 300px;
   overflow: hidden;
   border-radius: 15px;
@@ -302,7 +302,7 @@ button.next {
   padding: 25px;
   border: 2px solid lime;
   border-radius: 12px;
-  max-width: 480px;
+  max-width: 600px;
   box-shadow: 0 0 25px lime;
   background: rgba(0, 30, 30, 0.85);
   animation: fadeIn 2s ease-in;
