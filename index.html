@@ -40,7 +40,12 @@
     <button class="prev">❮</button>
     <button class="next">❯</button>
   </div>
-  
+<section id="payment">
+  <h2>Support My Work 💖</h2>
+  <p>If you’d like to order a website or support my projects, you can send a payment safely using PayPal:</p>
+  <div id="paypal-button-container"></div>
+</section>
+
       <p class="contact">
         Contact me:
         <a href="mailto:imakewebsitesforyou@outlook.com">imakewebsitesforyou@outlook.com</a>
@@ -53,5 +58,39 @@
   </footer>
 
   <script src="app.js"></script>
+  <!-- PayPal SDK (replace YOUR_CLIENT_ID with yours) -->
+<script src="https://www.paypal.com/sdk/js?client-id=ATuyVl7_AgVkJEpNqFE5AInPPJ4KXsQFQEj2MAjfhJPjh8I-_MzubjytwBgglNk7w6ZJphJkljVrVa3K&currency=GBP"></script>
+
+<script>
+  paypal.Buttons({
+    style: {
+      color: 'blue',
+      shape: 'pill',
+      label: 'pay',
+      layout: 'vertical'
+    },
+    createOrder: function(data, actions) {
+      // Example: Set a fixed price of $50
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '50.00'
+          },
+          description: "Custom Website Order"
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Payment completed! Thank you, ' + details.payer.name.given_name + ' 🎉');
+      });
+    },
+    onError: function(err) {
+      console.error(err);
+      alert('Something went wrong with PayPal. Please try again.');
+    }
+  }).render('#paypal-button-container');
+</script>
+
 </body>
 </html>

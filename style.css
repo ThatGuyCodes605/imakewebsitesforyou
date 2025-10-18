@@ -297,3 +297,17 @@ button.next {
   right: 5px;
 }
 
+#payment {
+  margin: 40px auto;
+  padding: 20px;
+  border: 2px solid cyan;
+  border-radius: 12px;
+  max-width: 400px;
+  box-shadow: 0 0 20px cyan;
+  background: rgba(0, 30, 30, 0.8);
+  animation: fadeIn 2s ease-in;
+}
+#payment h2 {
+  color: #00ffff;
+  text-shadow: 0 0 10px cyan;
+}
