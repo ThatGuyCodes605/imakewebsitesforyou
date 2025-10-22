@@ -61,34 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showSlide(currentIndex);
   }, 4000);
 
-  // 🟡 EmailJS Setup
-  emailjs.init("vOtzuihNoRrYTbz2Z");
-
-  const sendBtn = document.getElementById("send-btn");
-  const paypalContainer = document.getElementById("paypal-button-container");
-
-  sendBtn.addEventListener("click", () => {
-    const email = document.getElementById("user-email").value.trim();
-    const message = document.getElementById("user-message").value.trim();
-
-    if (!email || !message) {
-      alert("Please fill out both fields before continuing.");
-      return;
-    }
-
-    emailjs.send("service_8iufopm", "template_27ub2xp", {
-      from_email: email,
-      message: message,
-    }).then(() => {
-      alert("✅ Message sent successfully! Now complete your payment below.");
-      paypalContainer.style.display = "block";
-      sendBtn.style.display = "none";
-    }).catch((err) => {
-      console.error("EmailJS error:", err);
-      alert("❌ Failed to send message. Please try again.");
-    });
-  });
-
   // 💳 PayPal
   paypal.Buttons({
     style: {
