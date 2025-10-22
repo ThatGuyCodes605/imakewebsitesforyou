@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 ```
-#how to do paypal
+# how to do paypal
 ```
 // 💳 PayPal
   paypal.Buttons({
@@ -98,3 +98,469 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 ```
+# index.html
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We Make Websites</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- glowing background grid -->
+  <div class="bg-grid"></div>
+
+  <header>
+    <h1 class="neon-glow">We Make Websites for You!</h1>
+    <hr />
+  </header>
+
+  <main>
+    <h2 class="typing" id="typewriter"></h2>
+
+<section class="content">
+<section class="content">
+  <p>
+    I create custom websites that are fast, modern, and user-friendly. From simple personal pages to interactive projects,
+    I design and build everything using HTML, CSS, and JavaScript. I focus on clean design, smooth performance, and
+    making each site work perfectly on any device. Whether you need a portfolio, a blog, or a fun, creative project,
+    I can bring your ideas to life on the web.
+  </p>
+      <p>websites we have made</p>
+
+      <div class="slider">
+        <div class="slides">
+          <img src="screenshot-2025-10-17_17-36-41.png" class="slide active" alt="Slide 1">
+          <img src="screenshot-2025-10-17_17-43-10.png" class="slide" alt="Slide 2">
+        </div>
+        <button class="prev">❮</button>
+        <button class="next">❯</button>
+      </div>
+
+      <!-- 💳 Combined Email + PayPal Box -->
+      <section id="payment">
+        <h2>Order Your Website 💻</h2>
+        <p>Enter your email and a short message about your website idea. Then click below to send it and pay £20 securely via PayPal.</p>
+
+        <form id="payment-form">
+          <input type="email" id="user-email" placeholder="Your Email" required />
+          <textarea id="user-message" placeholder="Your Message" rows="4" required></textarea>
+          <button type="button" id="send-btn">Send Message & Pay £20</button>
+        </form>
+
+        <!-- PayPal button appears here after sending message -->
+        <div id="paypal-button-container" style="display:none; margin-top:15px;"></div>
+      </section>
+
+      <p class="contact">
+        Contact me:
+        <a href="mailto:imakewebsitesforyou@outlook.com">imakewebsitesforyou@outlook.com</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 We Make Websites | Crafted with ❤️ and code</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=ATuyVl7_AgVkJEpNqFE5AInPPJ4KXsQFQEj2MAjfhJPjh8I-_MzubjytwBgglNk7w6ZJphJkljVrVa3K&currency=GBP"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+
+```
+# style.css
+```
+/* RESET */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Consolas, monospace;
+  background-color: #000;
+  color: #00ffff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Keep sections stacked normally */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centers horizontally */
+  justify-content: center;
+  width: 100%;
+}
+
+/* MOBILE-FRIENDLY SLIDER */
+.slider {
+  position: relative;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 800px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 0 20px lime;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Fade-in animation */
+  opacity: 0;
+  transform: scale(0.95);
+  animation: fadeIn 1.5s ease forwards;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .slider {
+    height: 350px;
+    margin: 40px auto;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .slider {
+    height: 400px;
+    margin: 60px auto;
+  }
+}
+
+/* Animated background grid */
+.bg-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 255, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+  background-size: 30px 30px;
+  z-index: -1;
+  animation: gridMove 10s linear infinite;
+}
+
+/* Larger grid on bigger screens */
+@media (min-width: 768px) {
+  .bg-grid {
+    background-size: 40px 40px;
+  }
+}
+
+@keyframes gridMove {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 40px 40px, 40px 40px;
+  }
+}
+
+/* HEADER */
+header {
+  padding: 20px 0 15px;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+  animation: fadeSlideDown 1.5s ease-out;
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  padding: 0 15px;
+}
+
+.neon-glow {
+  color: aqua;
+  text-shadow: 0 0 10px aqua, 0 0 20px aqua, 0 0 40px cyan, 0 0 80px cyan;
+  animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow: 0 0 10px aqua, 0 0 20px aqua;
+  }
+  100% {
+    text-shadow: 0 0 20px cyan, 0 0 60px lime;
+  }
+}
+
+/* HR glow */
+hr {
+  border: none;
+  height: 2px;
+  width: 80%;
+  background: linear-gradient(90deg, transparent, aqua, lime, transparent);
+  margin: 20px auto;
+  animation: glowLine 3s infinite alternate;
+}
+
+@keyframes glowLine {
+  from {
+    box-shadow: 0 0 5px aqua;
+  }
+  to {
+    box-shadow: 0 0 25px lime;
+  }
+}
+
+/* Typing text */
+.typing {
+  font-size: clamp(1.3rem, 4vw, 2.5rem);
+  font-weight: bold;
+  margin-top: 30px;
+  min-height: 2.2em;
+  border-right: 3px solid lime;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.8s step-end infinite;
+  color: #00ffff;
+  padding: 0 15px;
+}
+
+/* Paragraph boxes */
+.content p {
+  font-size: 1rem;
+  margin: 25px auto;
+  max-width: 90%;
+  padding: 20px;
+  border: 2px solid lime;
+  border-radius: 12px;
+  background: rgba(0, 20, 0, 0.85);
+  box-shadow: 0 0 20px lime;
+  animation: fadeIn 2s ease-in;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .content p {
+    font-size: 1.2em;
+    max-width: 750px;
+    padding: 25px;
+    margin: 40px auto;
+  }
+}
+
+.content p:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 35px #00ff99;
+}
+
+/* Contact link */
+.contact a {
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 0 0 10px #00ffff;
+  transition: all 0.3s ease;
+}
+
+.contact a:hover {
+  color: lime;
+  text-shadow: 0 0 20px lime;
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  padding: 15px 0;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 0.9rem;
+  color: #00ffff;
+  opacity: 0.9;
+  border-top: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+/* Animations */
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+* {
+  text-align: center;
+}
+
+.slides {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  object-fit: cover;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* MOBILE-FRIENDLY SLIDER BUTTONS */
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 50%;
+  user-select: none;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  button.prev,
+  button.next {
+    font-size: 2rem;
+    padding: 10px 15px;
+  }
+}
+
+button.prev:hover,
+button.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+button.prev {
+  left: 5px;
+}
+
+button.next {
+  right: 5px;
+}
+
+#payment {
+  margin: 40px auto;
+  padding: 25px;
+  border: 2px solid lime;
+  border-radius: 12px;
+  max-width: 600px;
+  box-shadow: 0 0 25px lime;
+  background: rgba(0, 30, 30, 0.85);
+  animation: fadeIn 2s ease-in;
+  text-align: center;
+}
+
+#payment h2 {
+  color: #00ff99;
+  text-shadow: 0 0 15px lime, 0 0 25px #00ffcc;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 15px;
+}
+
+#payment p {
+  font-size: 1rem;
+  color: #00ffcc;
+  margin-bottom: 20px;
+}
+
+#payment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#payment-form input,
+#payment-form textarea {
+  width: 90%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+  background: #000;
+  color: #00ffff;
+  font-family: Consolas, monospace;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#payment-form input:focus,
+#payment-form textarea:focus {
+  box-shadow: 0 0 15px #00ffff;
+  border-color: lime;
+}
+
+#send-btn {
+  background: linear-gradient(90deg, cyan, lime);
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px cyan;
+}
+
+#send-btn:hover {
+  background: linear-gradient(90deg, lime, cyan);
+  box-shadow: 0 0 30px lime;
+  transform: scale(1.05);
+}
+
+#paypal-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  padding: 15px 0;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 0.9rem;
+  color: #00ffff;
+  opacity: 0.9;
+  border-top: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+```
+# website link
+https://thatguycodes605.github.io/imakewebsitesforyou/
